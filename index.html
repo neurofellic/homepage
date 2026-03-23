@@ -1,323 +1,818 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Neuro Fellic | MLBB Team Esports</title>
+  <title>Neuro Fellic | MLBB Esports</title>
   <link rel="icon" type="image/png" href="https://i.supaimg.com/f91e6348-9026-4e3c-b05c-a44c779f75f3/ff51106d-d750-4cb4-8c7e-5add906f43d1.png">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --gold: #c9a96e;
+      --gold-light: #e8cfa0;
+      --gold-dim: rgba(201,169,110,0.12);
+      --bg: #08090e;
+      --bg-2: #0c0e16;
+      --bg-card: #10131f;
+      --border: rgba(201,169,110,0.11);
+      --border-hover: rgba(201,169,110,0.26);
+      --text: #d8d9e0;
+      --muted: #555870;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: 'Poppins', sans-serif;
-      background: #0b0f1a;
-      color: #ffffff;
-      scroll-behavior: smooth;
-    }/* Navbar */
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 40px;
-  background: #0f1626;
-  border-bottom: 1px solid #1f2a44;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
-.nav-left, .nav-right {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 52px;
+      height: 68px;
+      background: rgba(8,9,14,0.88);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(24px);
+    }
 
-nav img.logo-left {
-  height: 45px;
-  border-radius: 12px;
-}
+    .nav-brand { display: flex; align-items: center; gap: 13px; }
+    .nav-brand img { height: 36px; opacity: 0.9; }
+    .nav-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold-light);
+    }
 
-nav img.logo-right {
-  height: 45px;
-  width: 45px;
-  border-radius: 50%;
-  border: 2px solid #2f3f6b;
-}
+    .nav-links { display: flex; gap: 40px; }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
 
-nav a {
-  text-decoration: none;
-  color: #ccc;
-  font-weight: 500;
-  transition: 0.3s;
-}
+    .nav-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border-hover);
+      object-fit: cover;
+      opacity: 0.85;
+    }
 
-nav a:hover { color: #00c3ff; }
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px;
+      overflow: hidden;
+    }
 
-/* Hero */
-.hero {
-  text-align: center;
-  padding: 100px 20px;
-  background: linear-gradient(135deg, #0b0f1a 40%, #111a2e 100%);
-}
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 40%, rgba(201,169,110,0.05) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 80% 70%, rgba(201,169,110,0.02) 0%, transparent 60%);
+      pointer-events: none;
+    }
 
-.hero h1 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 48px;
-  margin-bottom: 20px;
-  letter-spacing: 2px;
-}
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-.hero p {
-  color: #bbb;
-  max-width: 700px;
-  margin: 0 auto 30px;
-}
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: rise 0.9s 0.1s ease forwards;
+    }
 
-.btn {
-  padding: 12px 30px;
-  background: #00c3ff;
-  color: #000;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s;
-}
+    .hero-logo {
+      width: 130px; height: 130px;
+      object-fit: contain;
+      margin-bottom: 44px;
+      opacity: 0;
+      animation: rise 0.9s 0.2s ease forwards, float 7s ease-in-out infinite 1.2s;
+      filter: drop-shadow(0 0 28px rgba(201,169,110,0.2));
+    }
 
-.btn:hover { background: #0099cc; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
 
-/* Section */
-section {
-  padding: 80px 20px;
-  text-align: center;
-}
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(60px, 11vw, 112px);
+      font-weight: 300;
+      letter-spacing: 14px;
+      text-transform: uppercase;
+      line-height: 1;
+      color: #fff;
+      margin-bottom: 6px;
+      opacity: 0;
+      animation: rise 0.9s 0.3s ease forwards;
+    }
 
-section h2 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 32px;
-  margin-bottom: 20px;
-}
+    .hero-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 6px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: rise 0.9s 0.4s ease forwards;
+    }
 
-section p {
-  max-width: 800px;
-  margin: auto;
-  color: #bbb;
-}
+    .hero-rule {
+      width: 1px; height: 52px;
+      background: linear-gradient(180deg, transparent, var(--gold), transparent);
+      margin: 0 auto 36px;
+      opacity: 0;
+      animation: rise 0.9s 0.45s ease forwards;
+    }
 
-/* Team */
-.team-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  margin-top: 40px;
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
-}
+    .hero-desc {
+      max-width: 460px;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 2;
+      color: var(--muted);
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: rise 0.9s 0.5s ease forwards;
+    }
 
-.card {
-  background: #111a2e;
-  padding: 25px;
-  border-radius: 15px;
-  transition: 0.3s;
-  border: 1px solid #1f2a44;
-}
+    .hero-cta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+      animation: rise 0.9s 0.6s ease forwards;
+    }
 
-.card:hover {
-  transform: translateY(-5px);
-  border-color: #00c3ff;
-}
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 34px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.35s;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+    }
 
-.avatar {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: #1f2a44;
-  margin: 0 auto 15px;
-}
+    .btn-solid {
+      background: var(--gold);
+      color: #08090e;
+    }
+    .btn-solid:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(201,169,110,0.2);
+    }
 
-.role { color: #00c3ff; font-size: 14px; }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border-hover);
+      color: var(--gold-light);
+    }
+    .btn-ghost:hover {
+      background: var(--gold-dim);
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
 
-/* Footer */
-footer {
-  padding: 40px 20px;
-  background: #0f1626;
-  border-top: 1px solid #1f2a44;
-}
+    /* ── STATS ── */
+    .stats {
+      display: flex;
+      justify-content: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-2);
+    }
 
-.instagram {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: #fff;
-  text-decoration: none;
-  margin-top: 15px;
-  font-weight: 500;
-  transition: 0.3s;
-}
+    .stat {
+      flex: 1;
+      max-width: 220px;
+      text-align: center;
+      padding: 38px 24px;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
 
-.instagram:hover { color: #00c3ff; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 46px;
+      font-weight: 300;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 7px;
+    }
 
-.instagram img {
-  width: 28px;
-}
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
 
-@media (max-width: 768px) {
-  .hero h1 { font-size: 32px; }
-  nav { padding: 15px 20px; }
-}
-.avatar {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #00c3ff;
-}
-/* ===== SISTEM WARNA SELANG-SLING ORANYE–KUNING–HITAM ===== */
+    /* ── SECTION ── */
+    .section { padding: 100px 52px; }
 
-/* Link Hover */
-nav a:hover {
-  background: linear-gradient(90deg, orange, gold, black, orange);
-  background-size: 200% auto;
-  animation: gradientMove 3s linear infinite;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+    .section-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
 
-/* Button */
-.btn {
-  background: linear-gradient(90deg, orange, gold, black, orange);
-  background-size: 200% auto;
-  animation: gradientMove 4s linear infinite;
-  color: #fff;
-}
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 5vw, 54px);
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      line-height: 1.08;
+      color: #fff;
+      margin-bottom: 28px;
+    }
 
-.btn:hover {
-  filter: brightness(1.1);
-}
+    /* ── ABOUT ── */
+    .about-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
 
-/* Role Text */
-.role {
-  background: linear-gradient(90deg, gold, orange, black, gold);
-  background-size: 200% auto;
-  animation: gradientMove 5s linear infinite;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+    .about-body p {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 2;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .about-body p:last-child { margin-bottom: 0; }
 
-/* Card Hover Border */
-.card:hover {
-  border: 1px solid orange;
-  box-shadow: 0 0 15px rgba(255,165,0,0.4);
-}
+    .about-img-frame {
+      position: relative;
+    }
+    .about-img-frame img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      border-radius: 16px;
+      display: block;
+      filter: brightness(0.65) saturate(0.5);
+    }
+    .about-img-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: linear-gradient(160deg, rgba(201,169,110,0.07) 0%, transparent 50%);
+      pointer-events: none;
+    }
 
-/* Avatar Border */
-.avatar {
-  border: 2px solid orange;
-}
+    .about-chip {
+      position: absolute;
+      bottom: 18px;
+      right: 18px;
+      background: rgba(8,9,14,0.9);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: var(--gold);
+      backdrop-filter: blur(12px);
+    }
 
-/* Animasi Gerak Gradasi */
-@keyframes gradientMove {
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
-}
+    /* ── PARALLAX ── */
+    .parallax {
+      height: 260px;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+    }
+    .parallax::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, var(--bg) 0%, rgba(8,9,14,0.45) 30%, rgba(8,9,14,0.45) 70%, var(--bg) 100%);
+    }
+    .parallax-about { background-image: url('https://i.supaimg.com/f91e6348-9026-4e3c-b05c-a44c779f75f3/ad5157a4-b3ff-457c-b019-b80a97927749.jpg'); }
+    .parallax-team  { background-image: url('https://i.supaimg.com/f91e6348-9026-4e3c-b05c-a44c779f75f3/28b14c3e-6448-4622-98be-1b092125133c.jpg'); }
 
-/* ===== PARALLAX SECTION ===== */
-.parallax {
-  height: 300px;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+    /* ── TEAM ── */
+    .team-section {
+      background: var(--bg-2);
+      padding: 100px 52px;
+    }
 
-/* Parallax setelah About */
-.parallax-about {
-  background-image: url('https://i.supaimg.com/f91e6348-9026-4e3c-b05c-a44c779f75f3/3077ab29-38cf-4b96-bccd-66af01db43ca.jpg');
-}
+    .team-inner { max-width: 1100px; margin: 0 auto; }
 
-/* Parallax setelah Team */
-.parallax-team {
-  background-image: url('https://i.supaimg.com/f91e6348-9026-4e3c-b05c-a44c779f75f3/f6519bd7-88d4-4a5d-bffd-3bbc5a2a9667.jpg');
-}
+    .team-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .filter-pills { display: flex; gap: 8px; }
+
+    .pill {
+      padding: 8px 22px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .pill.active, .pill:hover {
+      background: var(--gold-dim);
+      border-color: var(--border-hover);
+      color: var(--gold-light);
+    }
+
+    .roster-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(188px, 1fr));
+      gap: 14px;
+    }
+
+    .player-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 32px 20px 24px;
+      text-align: center;
+      position: relative;
+      transition: all 0.4s;
+      overflow: hidden;
+    }
+
+    .player-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 50%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .player-card:hover {
+      border-color: var(--border-hover);
+      background: #131624;
+      transform: translateY(-4px);
+      box-shadow: 0 20px 44px rgba(0,0,0,0.3);
+    }
+    .player-card:hover::before { opacity: 1; }
+
+    .player-num {
+      position: absolute;
+      top: 13px; right: 15px;
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 1px;
+      color: var(--muted);
+      opacity: 0.45;
+    }
+
+    .avatar-wrap {
+      width: 78px; height: 78px;
+      border-radius: 50%;
+      margin: 0 auto 18px;
+      background: linear-gradient(135deg, rgba(201,169,110,0.12), rgba(201,169,110,0.03));
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .avatar-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+    .avatar-icon { width: 30px; height: 30px; opacity: 0.15; }
+
+    .player-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: #e8e9f0;
+      margin-bottom: 8px;
+    }
+
+    .player-role {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--gold-dim);
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .player-badge {
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .sub-card { opacity: 0.62; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 72px 52px 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .footer-brand-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .footer-brand-row img { height: 38px; opacity: 0.88; }
+    .footer-brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 400;
+      letter-spacing: 4px; text-transform: uppercase;
+      color: var(--gold-light);
+    }
+    .footer-desc { font-size: 13px; font-weight: 300; line-height: 1.9; color: var(--muted); }
+
+    .footer-center-col {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 14px;
+    }
+    .footer-logo-lg {
+      width: 70px; opacity: 0.72;
+      filter: drop-shadow(0 0 14px rgba(201,169,110,0.15));
+    }
+    .footer-motto {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px; font-weight: 300;
+      letter-spacing: 3px; color: var(--muted);
+      text-transform: uppercase; text-align: center;
+    }
+
+    .footer-right-col { text-align: right; }
+    .footer-social-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 3px;
+      color: var(--muted); text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 22px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      transition: all 0.35s;
+    }
+    .social-btn img { width: 18px; border-radius: 4px; }
+    .social-btn:hover {
+      border-color: var(--border-hover);
+      background: var(--gold-dim);
+      color: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 28px auto 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .footer-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 1px;
+      color: var(--muted);
+    }
+    .footer-game-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(201,169,110,0.28);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .section, .team-section { padding: 64px 20px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-right-col { text-align: left; }
+      .footer-center-col { align-items: flex-start; }
+      .stats { flex-wrap: wrap; }
+      .stat { border-right: none; border-bottom: 1px solid var(--border); min-width: 130px; }
+      .stat:last-child { border-bottom: none; }
+      footer { padding: 52px 20px 32px; }
+    }
+
+    @media (max-width: 560px) {
+      .roster-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero h1 { letter-spacing: 8px; }
+    }
   </style>
 </head>
-<body>  <!-- Navbar -->  <nav>
-    <div class="nav-left">
-      <img src="https://i.supaimg.com/f91e6348-9026-4e3c-b05c-a44c779f75f3/8c120807-8818-4402-9680-43388e409266.png" class="logo-left" alt="Logo Left">
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-brand">
+      <img src="https://i.supaimg.com/f91e6348-9026-4e3c-b05c-a44c779f75f3/8c120807-8818-4402-9680-43388e409266.png" alt="Neuro Fellic">
+      <span class="nav-name"></span>
     </div>
-    <div class="nav-right">
-      <img src="https://i.supaimg.com/f91e6348-9026-4e3c-b05c-a44c779f75f3/ff51106d-d750-4cb4-8c7e-5add906f43d1.png" class="logo-right" alt="Profile Logo">
+    <div class="nav-links">
+      <a href="#about">Tentang</a>
+      <a href="#team">Roster</a>
+      <a href="#contact">Kontak</a>
     </div>
-  </nav>  <!-- Hero -->  <div class="hero">
-    <h1>NEURO FELLIC</h1>
-    <p>Neuro Fellic, team esport kecil yang diketuai oleh Champ, Hendra 2F dan diwakili oleh presdir Korut, Kim Danang.</p>
-    <button class="btn" onclick="scrollToTeam()">Lihat Role</button>
-  </div>  <!-- About -->  <section id="about">
-    <h2>Tentang</h2>
-    <p>Team esport amatiran ini digagas pada tahun 2025 ditengah team-team pro yang lainnya. Diharapkan Neuro Fellic dapaat berkembang dan mampu menembus ajang-ajang, kompetisi dan meraih tahta kejuaraan, dan akan terus belajar seiring berkembangnya MLBB hingga kedepannya.</p>
-  </section> <div class="parallax parallax-about"></div> <!-- Team -->  <section id="team">
-    <h2>Role</h2>
-    <div class="team-container">
-      <div class="card">
-        <img src="" class="avatar" alt="Player">
-        <h3>Player 1</h3>
-        <p class="role">EXP Laner</p>
+    <img src="https://i.supaimg.com/f91e6348-9026-4e3c-b05c-a44c779f75f3/ff51106d-d750-4cb4-8c7e-5add906f43d1.png" class="nav-avatar" alt="Logo">
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Mobile Legends Bang Bang · Est. 2025</p>
+      <img src="https://i.supaimg.com/f91e6348-9026-4e3c-b05c-a44c779f75f3/ff51106d-d750-4cb4-8c7e-5add906f43d1.png" class="hero-logo" alt="Logo">
+      <h1>Neuro Fellic</h1>
+      <p class="hero-sub"Esports Team</p>
+      <div class="hero-rule"></div>
+      <p class="hero-desc">Tim esport yang lahir dari semangat, dipimpin oleh Champ, dengan visi menembus panggung kompetisi MLBB Indonesia.</p>
+      <div class="hero-cta">
+        <button class="btn btn-solid" onclick="document.getElementById('team').scrollIntoView({behavior:'smooth'})">Lihat Role</button>
+        <a href="https://www.instagram.com/neuroeasport" target="_blank" class="btn btn-ghost">Follow Instagram</a>
       </div>
-      <div class="card">
-        <img src="" class="avatar" alt="Player">
-        <h3>Player 2</h3>
-        <p class="role">Jungler</p>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats reveal">
+    <div class="stat"><div class="stat-num">10</div><div class="stat-label">Anggota</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-label">Role Utama</div></div>
+    <div class="stat"><div class="stat-num">2025</div><div class="stat-label">Berdiri</div></div>
+    <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Ambisi</div></div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="about-grid">
+      <div class="about-body reveal">
+        <p class="section-tag">Tentang Kami</p>
+        <h2 class="section-heading">Lahir dari<br>Semangat</h2>
+        <p>Neuro Fellic adalah tim esport amatir Mobile Legends: Bang Bang yang digagas pada tahun 2025. Di tengah persaingan ketat dunia esports, kami hadir dengan tekad dan semangat yang tidak kalah dari tim-tim profesional.</p>
+        <p>Dipimpin oleh Champ, serta diwakili oleh Presiding Director Kim Danang, Neuro Fellic berambisi untuk terus berkembang, menembus kompetisi, dan meraih tahta kejuaraan.</p>
       </div>
-      <div class="card">
-        <img src="" class="avatar" alt="Player">
-        <h3>Player 3</h3>
-        <p class="role">Mid Laner</p>
+      <div class="about-img-frame reveal">
+        <img src="https://i.supaimg.com/f91e6348-9026-4e3c-b05c-a44c779f75f3/3d2d04bd-4bf9-4abf-8ccb-5eb82c3eb476.jpg" alt="Team">
+        <div class="about-chip">Neuro Fellic · MLBB</div>
       </div>
-      <div class="card">
-        <img src="" class="avatar" alt="Player">
-        <h3>Player 4</h3>
-        <p class="role">Gold Laner</p>
+    </div>
+  </section>
+
+  <div class="parallax parallax-about"></div>
+
+  <!-- TEAM -->
+  <section class="team-section" id="team">
+    <div class="team-inner">
+      <div class="team-top reveal">
+        <div>
+          <p class="section-tag">Role</p>
+          <h2 class="section-heading">Tim Kami</h2>
+        </div>
+        <div class="filter-pills">
+          <button class="pill active" data-filter="all">Semua</button>
+          <button class="pill" data-filter="main">Main</button>
+          <button class="pill" data-filter="sub">Sub</button>
+        </div>
       </div>
-      <div class="card">
-        <img src="" class="avatar" alt="Player">
-        <h3>Player 5</h3>
-        <p class="role">Roamer</p>
+
+      <div class="roster-grid">
+        <div class="player-card reveal" data-type="main">
+          <span class="player-num">#01</span>
+          <div class="avatar-wrap"><svg class="avatar-icon" viewBox="0 0 24 24" fill="white"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></div>
+          <div class="player-name">Player 1</div>
+          <div class="player-role">EXP Laner</div>
+          <div class="player-badge">Main Roster</div>
+        </div>
+
+        <div class="player-card reveal" data-type="main">
+          <span class="player-num">#02</span>
+          <div class="avatar-wrap"><svg class="avatar-icon" viewBox="0 0 24 24" fill="white"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></div>
+          <div class="player-name">Player 2</div>
+          <div class="player-role">Jungler</div>
+          <div class="player-badge">Main Roster</div>
+        </div>
+
+        <div class="player-card reveal" data-type="main">
+          <span class="player-num">#03</span>
+          <div class="avatar-wrap"><svg class="avatar-icon" viewBox="0 0 24 24" fill="white"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></div>
+          <div class="player-name">Player 3</div>
+          <div class="player-role">Mid Laner</div>
+          <div class="player-badge">Main Roster</div>
+        </div>
+
+        <div class="player-card reveal" data-type="main">
+          <span class="player-num">#04</span>
+          <div class="avatar-wrap"><svg class="avatar-icon" viewBox="0 0 24 24" fill="white"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></div>
+          <div class="player-name">Player 4</div>
+          <div class="player-role">Gold Laner</div>
+          <div class="player-badge">Main Roster</div>
+        </div>
+
+        <div class="player-card reveal" data-type="main">
+          <span class="player-num">#05</span>
+          <div class="avatar-wrap"><svg class="avatar-icon" viewBox="0 0 24 24" fill="white"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></div>
+          <div class="player-name">Player 5</div>
+          <div class="player-role">Roamer</div>
+          <div class="player-badge">Main Roster</div>
+        </div>
+
+        <div class="player-card sub-card reveal" data-type="sub">
+          <span class="player-num">#06</span>
+          <div class="avatar-wrap"><svg class="avatar-icon" viewBox="0 0 24 24" fill="white"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></div>
+          <div class="player-name">Player 6</div>
+          <div class="player-role">EXP Laner</div>
+          <div class="player-badge">Sub Roster</div>
+        </div>
+
+        <div class="player-card sub-card reveal" data-type="sub">
+          <span class="player-num">#07</span>
+          <div class="avatar-wrap"><svg class="avatar-icon" viewBox="0 0 24 24" fill="white"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></div>
+          <div class="player-name">Player 7</div>
+          <div class="player-role">Jungler</div>
+          <div class="player-badge">Sub Roster</div>
+        </div>
+
+        <div class="player-card sub-card reveal" data-type="sub">
+          <span class="player-num">#08</span>
+          <div class="avatar-wrap"><svg class="avatar-icon" viewBox="0 0 24 24" fill="white"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></div>
+          <div class="player-name">Player 8</div>
+          <div class="player-role">Mid Laner</div>
+          <div class="player-badge">Sub Roster</div>
+        </div>
+
+        <div class="player-card sub-card reveal" data-type="sub">
+          <span class="player-num">#09</span>
+          <div class="avatar-wrap"><svg class="avatar-icon" viewBox="0 0 24 24" fill="white"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></div>
+          <div class="player-name">Player 9</div>
+          <div class="player-role">Gold Laner</div>
+          <div class="player-badge">Sub Roster</div>
+        </div>
+
+        <div class="player-card sub-card reveal" data-type="sub">
+          <span class="player-num">#10</span>
+          <div class="avatar-wrap"><svg class="avatar-icon" viewBox="0 0 24 24" fill="white"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></div>
+          <div class="player-name">Player 10</div>
+          <div class="player-role">Roamer</div>
+          <div class="player-badge">Sub Roster</div>
+        </div>
       </div>
-      <div class="card">
-        <img src="" class="avatar" alt="Player">
-        <h3>Player 6 (other)</h3>
-        <p class="role">EXP Laner 2</p>
     </div>
-    <div class="card">
-        <img src="" class="avatar" alt="Player">
-        <h3>Player 7 (other)</h3>
-        <p class="role">Jungler 2</p>
+  </section>
+
+  <div class="parallax parallax-team"></div>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="footer-grid">
+      <div class="reveal">
+        <div class="footer-brand-row">
+          <img src="https://i.supaimg.com/f91e6348-9026-4e3c-b05c-a44c779f75f3/8c120807-8818-4402-9680-43388e409266.png" alt="Logo">
+        </div>
+      <div class="footer-center-col reveal">
+        <img src="https://i.supaimg.com/f91e6348-9026-4e3c-b05c-a44c779f75f3/ff51106d-d750-4cb4-8c7e-5add906f43d1.png" class="footer-logo-lg" alt="Logo">
+        <p class="footer-motto">Play with heart</p>
+      </div>
+
+      <div class="footer-right-col reveal">
+        <p class="footer-social-label">Ikuti Kami</p>
+        <a href="https://www.instagram.com/neuroeasport?igsh=dGNtZGx6NjJjZHRl" target="_blank" class="social-btn">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+          @neuroeasport
+        </a>
+      </div>
     </div>
-    <div class="card">
-        <img src="" class="avatar" alt="Player">
-        <h3>Player 8 (other)</h3>
-        <p class="role">Mid Laner 2</p>
+
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Neuro Fellic. All rights reserved.</span>
+      <span class="footer-game-tag">Mobile Legends Bang Bang · Esports</span>
     </div>
-    <div class="card">
-        <img src="" class="avatar" alt="Player">
-        <h3>Player 9 (other)</h3>
-        <p class="role">Gold Laner</p>
-    </div>
-    <div class="card">
-        <img src="" class="avatar" alt="Player">
-        <h3>Player 10 (other)</h3>
-        <p class="role">Roamer 2</p>
-    </div>
-  </section> <div class="parallax parallax-team"></div> <!-- Footer / Contact -->  <footer id="contact">
-    <h2>Follow Us</h2>
-    <a href="https://www.instagram.com/neuroeasport?igsh=dGNtZGx6NjJjZHRl" target="_blank" class="instagram">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo">
-      @neuroeasport
-    </a>
-    <p style="margin-top:20px;color:#777;">© 2026 Neuro Fellic. All rights reserved.</p>
-  </footer>  <script>
-    function scrollToTeam() {
-      document.getElementById('team').scrollIntoView({ behavior: 'smooth' });
-    }
-  </script></body>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    document.querySelectorAll('.pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        const f = pill.dataset.filter;
+        document.querySelectorAll('.player-card').forEach(c => {
+          c.style.display = (f === 'all' || c.dataset.type === f) ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
 </html>
